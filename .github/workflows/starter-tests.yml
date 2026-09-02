@@ -27,6 +27,7 @@ jobs:
         run: dotnet restore
 
       - name: Build solution
+      
         run: dotnet build --no-restore
 
       - name: Run starter tests
