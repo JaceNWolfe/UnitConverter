@@ -1,16 +1,7 @@
-﻿@page
+﻿@page "{ConversionType?}/{Input?}"
 @model UnitConverter.Pages.ConversionsModel
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
 
 <h1>@ViewData["ConversionType"]</h1>
 
 <p>Input: @Model.Input</p>
 <p>Output: @Model.Output</p>
-</html>
