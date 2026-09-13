@@ -1,9 +1,9 @@
 ﻿@page "/Conversions/{ConversionType?}/{Input?}"
 @model UnitConverter.Pages.ConversionsModel
 
-<h1>@ViewData["ConversionType"]</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h1>Conversion</h1>
+<h1>@ViewData["ConversionType"]</h1>
 
 @if (ViewData["ErrorMessage"] != null)
 {

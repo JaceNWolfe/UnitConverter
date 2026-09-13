@@ -6,19 +6,18 @@ namespace UnitConverter.Pages;
 public class ConversionsModel : PageModel
 {
     [BindProperty(SupportsGet = true)]
-    public string Input { get; set; } = string.Empty;
+    public string Input { get; set; } = "3.1415";
 
     public string Output { get; set; } = string.Empty;
 
     [BindProperty(SupportsGet = true)]
-    public string ConversionType { get; set; } = string.Empty ;
+    public string ConversionType { get; set; } = "Miles to Kilometers" ;
 
 
     public void OnGet()
     {
         ViewData["ConversionType"] = ConversionType;
-        ViewData["Title"] = "Conversions - " + ConversionType;
-
+        ViewData["Title"] = "Conversions";
         double value;
         //catch if not a number
         try
@@ -33,8 +32,10 @@ public class ConversionsModel : PageModel
 
 
         // switch expression on conversionType
+        //.Replace(" ", "") gets rid of my unwanted problem with not accepting blank spaces so that I cant mess it up.
+        //Don't ask me why I have this problem. I dunno who puts spacebars in the url but apparently my fat fingers do.
 
-        switch (ConversionType.ToLower())
+        switch (ConversionType.ToLower().Replace(" ", ""))
         {
             case "milestokilometers":
                 Output = new UnitOf.Length().FromMiles(value).ToKilometers().ToString();
