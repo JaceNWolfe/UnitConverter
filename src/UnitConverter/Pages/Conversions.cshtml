@@ -3,7 +3,6 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<h1>@ViewData["ConversionType"]</h1>
 
 @if (ViewData["ErrorMessage"] != null)
 {
@@ -11,7 +10,9 @@
 }
 else
 {
-    <p>Conversion Type: @ViewData["ConversionType"]</p>
+    <p>Conversion Type: @Model.ConversionType</p>
     <p>Input: @Model.Input</p>
     <p>Output: @Model.Output</p>
 }
+
+<a href="/">Return to the conversion form</a>
