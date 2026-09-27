@@ -1,0 +1,59 @@
+﻿@page
+@using UnitConverter.Models
+@model UnitConverter.Pages.QuickConversions
+
+@{
+    ViewData["Title"] = "Quick Conversions";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="get" asp-page-handler="@ConversionTypes.MilesToKilometers" class="mb-3">
+    <label for="miles" class="form-label">Miles</label>
+    <input id="miles" name="input" type="text" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.KilometersToMiles" class="mb-3">
+    <label for="kilometers" class="form-label">Kilometers</label>
+    <input id="kilometers" name="input" type="number" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.FahrenheitToCelsius" class="mb-3">
+    <label for="fahrenheit" class="form-label">Fahrenheit</label>
+    <textarea id="fahrenheit" name="input" class="form-control"></textarea>
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit" class="mb-3">
+    <label for="celsius" class="form-label">Celsius (-40 to 100)</label>
+    <input id="celsius" name="input" type="range" class="form-control" min="-40" max="100" value="0" />
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.PoundsToKilograms" class="mb-3">
+    <label for="pounds" class="form-label">Pounds</label>
+    <select id="pounds" name="input" asp-items="Model.PoundOptions" class="form-select"></select>
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.KilogramsToPounds" class="mb-3">
+    <label for="kilogramsToPounds" class="form-label">Kilograms</label>
+    <input id="kilogramsToPounds" name="input" type="number" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.KsiToPsi" class="mb-3">
+    <label for="ksi" class="form-label">KSI</label>
+    <input id="ksi" name="input" type="number" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.SteresToTuns" class="mb-3">
+    <label for="steres" class="form-label">Steres</label>
+    <input id="steres" name="input" type="number" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<a asp-page="/Index">Return to the conversion form</a>
