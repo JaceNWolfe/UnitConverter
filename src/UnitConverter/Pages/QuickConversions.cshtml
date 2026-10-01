@@ -8,51 +8,105 @@
 
 <h1>@ViewData["Title"]</h1>
 
+@if (Model.ErrorMessage != null)
+{
+    <div role="alert" class="text-danger">
+        @Model.ErrorMessage
+    </div>
+}
+
+@if (Model.Output != null)
+{
+    <p>Output: @Model.Output</p>
+}
+
 <form method="get" asp-page-handler="@ConversionTypes.MilesToKilometers" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.MilesToKilometers" />
+
     <label for="miles" class="form-label">Miles</label>
     <input id="miles" name="input" type="text" class="form-control" />
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
 <form method="get" asp-page-handler="@ConversionTypes.KilometersToMiles" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.KilometersToMiles" />
+
     <label for="kilometers" class="form-label">Kilometers</label>
     <input id="kilometers" name="input" type="number" class="form-control" />
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
 <form method="get" asp-page-handler="@ConversionTypes.FahrenheitToCelsius" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.FahrenheitToCelsius" />
+
     <label for="fahrenheit" class="form-label">Fahrenheit</label>
     <textarea id="fahrenheit" name="input" class="form-control"></textarea>
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
 <form method="get" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.CelsiusToFahrenheit" />
+
     <label for="celsius" class="form-label">Celsius (-40 to 100)</label>
     <input id="celsius" name="input" type="range" class="form-control" min="-40" max="100" value="0" />
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
 <form method="get" asp-page-handler="@ConversionTypes.PoundsToKilograms" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.PoundsToKilograms" />
+
     <label for="pounds" class="form-label">Pounds</label>
     <select id="pounds" name="input" asp-items="Model.PoundOptions" class="form-select"></select>
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
 <form method="get" asp-page-handler="@ConversionTypes.KilogramsToPounds" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.KilogramsToPounds" />
+
     <label for="kilogramsToPounds" class="form-label">Kilograms</label>
     <input id="kilogramsToPounds" name="input" type="number" class="form-control" />
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
 <form method="get" asp-page-handler="@ConversionTypes.KsiToPsi" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.KsiToPsi" />
+
     <label for="ksi" class="form-label">KSI</label>
     <input id="ksi" name="input" type="number" class="form-control" />
+
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.PsiToKsi" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.PsiToKsi" />
+
+    <label for="psi" class="form-label">PSI</label>
+    <input id="psi" name="input" type="number" class="form-control" />
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
 <form method="get" asp-page-handler="@ConversionTypes.SteresToTuns" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.SteresToTuns" />
+
     <label for="steres" class="form-label">Steres</label>
     <input id="steres" name="input" type="number" class="form-control" />
+
+    <button type="submit" class="btn btn-primary mt-2">Convert</button>
+</form>
+
+<form method="get" asp-page-handler="@ConversionTypes.TunsToSteres" class="mb-3">
+    <input type="hidden" name="handler" value="@ConversionTypes.TunsToSteres" />
+
+    <label for="tuns" class="form-label">Tuns</label>
+    <input id="tuns" name="input" type="number" class="form-control" />
+
     <button type="submit" class="btn btn-primary mt-2">Convert</button>
 </form>
 
