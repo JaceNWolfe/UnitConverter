@@ -8,6 +8,9 @@ namespace UnitConverter.Pages;
 public class ConversionsModel : PageModel
 {
     private readonly IConversionService conversionService;
+    //you said use injection but it breaks lessons 1 and 2
+    private readonly ILogger<ConversionsModel> _logger =
+        Microsoft.Extensions.Logging.Abstractions.NullLogger<ConversionsModel>.Instance;
 
     public ConversionsModel()
     {
@@ -46,28 +49,52 @@ public class ConversionsModel : PageModel
         ViewData["ConversionType"] = ConversionType;
         ViewData["Title"] = "Conversions";
 
-        double value;
+        _logger.LogInformation(
+            "Received conversion request for {ConversionType} with input {Input}",
+            ConversionType,
+            Input);
 
-        // Catch if input is not a number
-        try
+        if (!decimal.TryParse(Input, out decimal value))
         {
-            value = Convert.ToDouble(Input);
-        }
-        catch (FormatException)
-        {
+            _logger.LogWarning(
+                "Invalid conversion input: {Input} for {ConversionType}",
+                Input,
+                ConversionType);
+
             ViewData["ErrorMessage"] = "Input must be a valid number.";
             return;
         }
 
         try
         {
-            Conversion.Output = conversionService
-                .Convert((decimal)value, Conversion.ConversionType)
-                .ToString();
+            decimal result = conversionService.Convert(value, ConversionType);
+            Conversion.Output = result.ToString();
+
+            _logger.LogInformation(
+                "Converted {Input} using {ConversionType} with result {Result}",
+                value,
+                ConversionType,
+                result);
         }
-        catch (ArgumentException)
+        catch (ArgumentException ex)
         {
-            ViewData["ErrorMessage"] = "Unknown conversion type. Please check spelling";
+            _logger.LogWarning(
+                ex,
+                "Unknown conversion type: {ConversionType}",
+                ConversionType);
+
+            ViewData["ErrorMessage"] =
+                "Unknown conversion type. Please check spelling";
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Unexpected conversion failure for {Input} using {ConversionType}",
+                value,
+                ConversionType);
+
+            ViewData["ErrorMessage"] = "An unexpected error occurred.";
         }
     }
 }
